@@ -8,7 +8,7 @@ using namespace std;
 #include "Team.hpp"
 
 void Print_Points(vector <Team*> League);
-void Delete_Teams(vector <Team*>& League);
+void Delete_All(vector <Team*>& League);
 bool compare(Team* a, Team* b);
 
 int main()
@@ -41,9 +41,7 @@ int main()
 
 	//
 	ptr = NULL;
-	Delete_Teams(League);
-	League.clear();
-	cout << "League was deleted" << endl;
+	Delete_All(League);
 	return 0;
 }
 
@@ -53,14 +51,15 @@ void Print_Points(vector <Team*> League)
 		cout << "| " << i->Get_Name() << " : " << i->Get_Points() << " points" << endl;
 }
 
-void Delete_Teams(vector <Team*>& League)
+void Delete_All(vector <Team*>& League)
 {
 	for (auto i : League)
 	{
 		delete i;
 		i = NULL;
 	}
-	cout << endl << "Teams were deleted" << endl;
+	League.clear();
+	cout <<  endl << "Teams were deleted" << endl << "League was deleted" << endl;
 }
 
 bool compare(Team* a,Team* b)
