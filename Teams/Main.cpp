@@ -6,6 +6,9 @@ using namespace std;
 
 #include "Team.hpp"
 
+void Print_Points(vector <Team*> League);
+void Delete_Teams(vector <Team*>& League);
+
 int main()
 {
 	vector <Team*> League;
@@ -29,5 +32,30 @@ int main()
 	League.push_back(ptr);
 	ptr = new Team("Silver", 7, 7, 5, 3, 7);
 	League.push_back(ptr);
+	cout << "Teams were added to League" << endl << endl << "|Tabel of teams points|" << endl;
+	Print_Points(League);
+	//
+
+	//
+	ptr = NULL;
+	Delete_Teams(League);
+	League.clear();
+	cout << "League was deleted" << endl;
 	return 0;
+}
+
+void Print_Points(vector <Team*> League)
+{
+	for (auto i : League)
+		cout << "| " << i->Get_Name() << " : " << ((3 * (i->Get_Wins())) + (i->Get_Draws())) << " points" << endl;
+}
+
+void Delete_Teams(vector <Team*>& League)
+{
+	for (auto i : League)
+	{
+		delete i;
+		i = NULL;
+	}
+	cout << endl << "Teams were deleted" << endl;
 }
