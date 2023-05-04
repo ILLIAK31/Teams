@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ using namespace std;
 
 void Print_Points(vector <Team*> League);
 void Delete_Teams(vector <Team*>& League);
+bool compare(Team* a, Team* b);
 
 int main()
 {
@@ -26,14 +28,15 @@ int main()
 	League.push_back(ptr);
 	ptr = new Team("Sharks", 3, 7, 4, 7, 5);
 	League.push_back(ptr);
-	ptr = new Team("Dinamo", 8, 4, 4, 7, 4);
+	ptr = new Team("Dinamo", 8, 7, 4, 7, 4);
 	League.push_back(ptr);
 	ptr = new Team("Gold", 2, 5, 3, 7, 4);
 	League.push_back(ptr);
-	ptr = new Team("Silver", 7, 7, 5, 3, 7);
+	ptr = new Team("Silver", 8, 7, 5, 3, 7);
 	League.push_back(ptr);
 	cout << "Teams were added to League" << endl << endl << "|Tabel of teams points|" << endl;
 	Print_Points(League);
+	sort(League.begin(), League.end(),compare);
 	//
 
 	//
@@ -47,7 +50,7 @@ int main()
 void Print_Points(vector <Team*> League)
 {
 	for (auto i : League)
-		cout << "| " << i->Get_Name() << " : " << ((3 * (i->Get_Wins())) + (i->Get_Draws())) << " points" << endl;
+		cout << "| " << i->Get_Name() << " : " << i->Get_Points() << " points" << endl;
 }
 
 void Delete_Teams(vector <Team*>& League)
@@ -58,4 +61,9 @@ void Delete_Teams(vector <Team*>& League)
 		i = NULL;
 	}
 	cout << endl << "Teams were deleted" << endl;
+}
+
+bool compare(Team* a,Team* b)
+{
+	return (a->Get_Points() != b->Get_Points()) ? (a->Get_Points() > b->Get_Points()) :(a->Get_Wins() != b->Get_Wins()) ? (a->Get_Wins() > b->Get_Wins()) :(a->Get_Loses() != b->Get_Loses())? (a->Get_Loses() < a->Get_Loses()) : (a->Get_Goals() != b->Get_Goals())? (a->Get_Goals() > b->Get_Goals()) :(a->Get_Lgoals() != b->Get_Lgoals())? (a->Get_Lgoals() < b->Get_Lgoals()):false;
 }
