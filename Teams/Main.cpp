@@ -59,7 +59,7 @@ void Print_Points(vector <Team*> League)
 
 void Delete_All(vector <Team*>& League)
 {
-	for (auto i : League)
+	for (auto& i : League)
 	{
 		delete i;
 		i = NULL;
