@@ -9,8 +9,15 @@ using namespace std;
 
 void Print_Points(vector <Team*> League);
 void Delete_All(vector <Team*>& League);
-bool compare(Team* a, Team* b);
 void Print_All(vector <Team*> League);
+
+template<> struct std::greater<Team*>
+{
+	bool operator()(Team* a, Team* b)
+	{
+		return (*a > *b);
+	}
+};
 
 int main()
 {
@@ -35,13 +42,10 @@ int main()
 	League.push_back(ptr);
 	ptr = new Team("Silver", 8, 7, 5, 3, 7);
 	League.push_back(ptr);
-	cout << "Teams were added to League" << endl << endl << "|Tabel of teams points|" << endl;
+	cout << "League was created" << endl << "Teams were added to League" << endl << endl << "|Tabel of teams points|" << endl;
 	Print_Points(League);
-	sort(League.begin(), League.end(),compare);
+	sort(League.begin(), League.end(), greater<Team*>());
 	Print_All(League);
-	//
-	
-	//
 	ptr = NULL;
 	Delete_All(League);
 	return 0;
@@ -62,11 +66,6 @@ void Delete_All(vector <Team*>& League)
 	}
 	League.clear();
 	cout <<  endl << "Teams were deleted" << endl << "League was deleted" << endl;
-}
-
-bool compare(Team* a,Team* b)
-{
-	return (a->Get_Points() != b->Get_Points()) ? (a->Get_Points() > b->Get_Points()) :(a->Get_Wins() != b->Get_Wins()) ? (a->Get_Wins() > b->Get_Wins()) :(a->Get_Loses() != b->Get_Loses())? (a->Get_Loses() < a->Get_Loses()) : (a->Get_Goals() != b->Get_Goals())? (a->Get_Goals() > b->Get_Goals()) :(a->Get_Lgoals() != b->Get_Lgoals())? (a->Get_Lgoals() < b->Get_Lgoals()):false;
 }
 
 void Print_All(vector<Team*> League)
