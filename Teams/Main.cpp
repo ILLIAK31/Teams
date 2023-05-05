@@ -10,6 +10,7 @@ using namespace std;
 void Print_Points(vector <Team*> League);
 void Delete_All(vector <Team*>& League);
 bool compare(Team* a, Team* b);
+void Print_All(vector <Team*> League);
 
 int main()
 {
@@ -37,8 +38,9 @@ int main()
 	cout << "Teams were added to League" << endl << endl << "|Tabel of teams points|" << endl;
 	Print_Points(League);
 	sort(League.begin(), League.end(),compare);
+	Print_All(League);
 	//
-
+	
 	//
 	ptr = NULL;
 	Delete_All(League);
@@ -65,4 +67,10 @@ void Delete_All(vector <Team*>& League)
 bool compare(Team* a,Team* b)
 {
 	return (a->Get_Points() != b->Get_Points()) ? (a->Get_Points() > b->Get_Points()) :(a->Get_Wins() != b->Get_Wins()) ? (a->Get_Wins() > b->Get_Wins()) :(a->Get_Loses() != b->Get_Loses())? (a->Get_Loses() < a->Get_Loses()) : (a->Get_Goals() != b->Get_Goals())? (a->Get_Goals() > b->Get_Goals()) :(a->Get_Lgoals() != b->Get_Lgoals())? (a->Get_Lgoals() < b->Get_Lgoals()):false;
+}
+
+void Print_All(vector<Team*> League)
+{
+	for (auto team : League)
+		cout << *team;
 }

@@ -10,9 +10,9 @@ public:
 	string Get_Name();
 	int Get_Points();
 	int Get_Wins();
-	int Get_Draws();
 	int Get_Loses();
 	int Get_Goals();
 	int Get_Lgoals();
+	friend ostream& operator<<(ostream& output, const Team& team);
 	~Team();
 };
